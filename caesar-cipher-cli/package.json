@@ -1,0 +1,29 @@
+{
+  "name": "caesar-cipher-cli",
+  "version": "1.0.0",
+  "description": "Node course, task 1",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon run index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/22-22/caesar-cipher-cli.git"
+  },
+  "keywords": [
+    "Node.js"
+  ],
+  "author": "Yuliya Kogol <kogol.julia@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/22-22/caesar-cipher-cli/issues"
+  },
+  "homepage": "https://github.com/22-22/caesar-cipher-cli#readme",
+  "dependencies": {
+    "minimist": "^1.2.5"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
