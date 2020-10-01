@@ -1,34 +1,35 @@
-const Stream = require('stream');
 const { pipeline } = require('stream');
-const path = require('path');
 const fs = require('fs');
-
-const { encode } = require('./utils');
-const { decode } = require('./utils');
 
 const { action } = require('./arguments');
 const { shift } = require('./arguments');
 const { input } = require('./arguments');
 const { output } = require('./arguments');
 
-const pathToRead = path.join(__dirname, input);
-const pathToWrite = path.join(__dirname, output);
+const { readStream } = require('./streams');
+const { writeStream } = require('./streams');
+const { transformStream } = require('./streams');
 
-const readStream = fs.createReadStream(pathToRead);
-const writeStream = fs.createWriteStream(pathToWrite);
+if (!action || !shift) {
+    console.error('Action and shift are required!');
+    process.exit(1);
+}
 
-// const readStream = process.stdin;
-// const writeStream = process.stdout;
+if (input) {
+    fs.promises.access(input, fs.constants.F_OK | fs.constants.R_OK)
+        .catch((err) => {
+            console.error(`${input} ${err.code === 'ENOENT' ? 'does not exist' : 'is not readable'}`);
+            process.exit(1);
+        })
+}
 
-const cypher = action === 'encode' ? encode : decode;
-
-const transformStream = new Stream.Transform({
-    transform(chunk, encoding, callback) {
-        const transformed = cypher(chunk.toString(), shift);
-        this.push(transformed);
-        callback();
-    }
-})
+if (output) {
+    fs.promises.access(output, fs.constants.F_OK | fs.constants.W_OK)
+        .catch((err) => {
+            console.error(`${output} ${err.code === 'ENOENT' ? 'does not exist' : 'is read-only'}`);
+            process.exit(1);
+        })
+}
 
 pipeline(
     readStream,
@@ -36,17 +37,8 @@ pipeline(
     writeStream,
     ((err) => {
         if (err) {
-            console.log(err)
+            console.log(err.message)
         }
         console.log('success')
     })
 )
-
-// process.stdin.pipe(transformStream).pipe(process.stdout);
-
-// transform: (data, _, done) => {
-//     done(null, { ...data, index: count++ })
-//   }
-
-// const input = 'inputTest.txt';
-// const output = 'outputTest.txt';
