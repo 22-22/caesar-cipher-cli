@@ -30,7 +30,7 @@ $ node caesar-cli -a encode -s 3 -i in.txt -o out.txt
 
 -----------------------------------------------------------------------------------------
 
-node caesar-cli --action decode --shift 15
+$ node caesar-cli --action decode --shift 15
 
 *you can enter in the command line...* ctl ntpg 2021
 
@@ -38,7 +38,7 @@ node caesar-cli --action decode --shift 15
 
 -----------------------------------------------------------------------------------------
 
-node caesar-cli --action decode --shift 22 --input C:/Users/Julia/Documents/prgr/rss-node/in.txt
+$ node caesar-cli --action decode --shift 22 --input C:/Users/Julia/Documents/prgr/rss-node/in.txt
 
 *in.txt* De, iu jwia eo Uqheuw!
 
