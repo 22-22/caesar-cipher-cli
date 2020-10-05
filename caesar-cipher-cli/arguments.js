@@ -7,12 +7,13 @@ const argv = minimist(process.argv.slice(2),
         }
     });
 
-const action = argv['action'];
-const shift = argv['shift'];
-const input = argv['input'];
-const output = argv['output'];
+const action = typeof argv['action'] === 'string' ? argv['action'] : '';
+const shift = typeof argv['shift'] === 'number' ? argv['shift'] : '';
+const input = typeof argv['input'] === 'string' ? argv['input'] : '';
+const output = typeof argv['output'] === 'string' ? argv['output'] : '';
 
 module.exports = {
     action, shift,
     input, output
 }
+

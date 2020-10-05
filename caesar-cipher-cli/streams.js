@@ -12,14 +12,12 @@ const { output } = require('./arguments');
 
 const cypher = action === 'encode' ? encode : decode;
 
-const readStream = input ? fs.createReadStream(path.join(__dirname, input)) : process.stdin;
-const writeStream = output ? fs.createWriteStream(path.join(__dirname, output), { 'flags': 'a+' }) : process.stdout;
+const readStream = input ? fs.createReadStream(path.resolve(__dirname, input)) : process.stdin;
+const writeStream = output ? fs.createWriteStream(path.resolve(__dirname, output), { 'flags': 'a+' }) : process.stdout;
 
 const transformStream = new Stream.Transform({
     transform(chunk, encoding, callback) {
         const transformed = cypher(chunk.toString(), shift);
-        // this.push(transformed);
-        // callback(); 
         callback(null, transformed);
     }
 })
