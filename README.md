@@ -28,6 +28,7 @@ $ node caesar-cli -a encode -s 3 -i in.txt -o out.txt
 
 *out.txt* ...uhfrughg wkh vrxqg ri wzr eodfn krohv froolglqj 1 eloolrq bhduv djr! Правда.
 
+-----------------------------------------------------------------------------------------
 
 node caesar-cli --action decode --shift 15
 
@@ -35,6 +36,7 @@ node caesar-cli --action decode --shift 15
 
 *...and get there* new year 2021
 
+-----------------------------------------------------------------------------------------
 
 node caesar-cli --action decode --shift 22 --input C:/Users/Julia/Documents/prgr/rss-node/in.txt
 
