@@ -11,14 +11,14 @@ const { writeStream } = require('./streams');
 const { transformStream } = require('./streams');
 
 if (!action || !shift) {
-    console.error('Action and shift are required!');
+    process.stderr.write('Action and shift are required!');
     process.exit(1);
 }
 
 if (input) {
     fs.promises.access(input, fs.constants.F_OK | fs.constants.R_OK)
         .catch((err) => {
-            console.error(`${input} ${err.code === 'ENOENT' ? 'does not exist' : 'is not readable'}`);
+            process.stderr.write(`${input} ${err.code === 'ENOENT' ? 'does not exist' : 'is not readable'}`);
             process.exit(1);
         })
 }
@@ -26,7 +26,7 @@ if (input) {
 if (output) {
     fs.promises.access(output, fs.constants.F_OK | fs.constants.W_OK)
         .catch((err) => {
-            console.error(`${output} ${err.code === 'ENOENT' ? 'does not exist' : 'is read-only'}`);
+            process.stderr.write(`${output} ${err.code === 'ENOENT' ? 'does not exist' : 'is read-only'}`);
             process.exit(1);
         })
 }
